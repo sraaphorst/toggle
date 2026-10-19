@@ -111,17 +111,17 @@ public enum BoardType {
         if (newx >= 0 && newy >= 0 && newx < w && newy < h)
             return Optional.of(new Coordinates(newx, newy));
 
-            // 2. x out of bounds, y in bounds.
+        // 2. x out of bounds, y in bounds.
         else if ((newx == -1 || newx == w) && (newy >= 0 && newy < h) && xAlign != AxisAlignment.NONE)
             // Loop x, and flip y if necessary.
             return Optional.of(new Coordinates((newx + w) % w, xAlign == AxisAlignment.LINKED ? newy : h - newy - 1));
 
-            // 3. x in bounds, y out of bounds.
-        else if ((newx >= 0 && newx < h) && (newy == -1 || newy == h) && yAlign != AxisAlignment.NONE)
+        // 3. x in bounds, y out of bounds.
+        else if ((newx >= 0 && newx < w) && (newy == -1 || newy == h) && yAlign != AxisAlignment.NONE)
             // Loop y, and flip x if necessary.
             return Optional.of(new Coordinates(yAlign == AxisAlignment.LINKED ? newx : w - newx - 1, (newy + h) % h));
 
-            // 4. x out of bounds, y out of bounds.
+        // 4. x out of bounds, y out of bounds.
         else if ((newx == -1 || newx == w) && (newy == -1 || newy == h)
                 && xAlign != AxisAlignment.NONE && yAlign != AxisAlignment.NONE) {
             // This is the most complicated case, worked out painfully by hand.
